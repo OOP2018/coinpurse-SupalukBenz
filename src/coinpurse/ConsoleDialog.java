@@ -1,10 +1,11 @@
 package coinpurse;
- 
+
 import java.util.Scanner;
 
-/** 
- * User Interface for the Coin Purse. 
+/**
+ * User Interface for the Coin Purse.
  * This class provides simple interactive dialog for inserting
+ * and removing money to/from the purse, and displaying the
  * and removing money to/from the purse, and displaying the
  * balance.
  */
@@ -17,19 +18,19 @@ public class ConsoleDialog {
     final String FULL_PROMPT = "\nEnter d (deposit), w (withdraw), ? (inquiry), or q (quit): ";
     // Shorter prompt shown subsequently
     final String SHORT_PROMPT = "\nEnter d, w, ?, or q: ";
-    
+
 	// The dialog receives a Purse object by dependency injection (as parameter to constructor)
     // so don't create a Purse here.
     private Purse purse;
-    
-    /** 
+
+    /**
      * Initialize a new Purse dialog.
      * @param purse is the Purse to interact with.
      */
     public ConsoleDialog(Purse purse ) {
     	this.purse = purse;
     }
-    
+
     /** Run the user interface. */
     public void run() {
         String choice = "";
@@ -41,7 +42,7 @@ public class ConsoleDialog {
             System.out.print(prompt);
             choice = console.next().trim().toLowerCase();
             prompt = SHORT_PROMPT;
- 
+
             switch(choice) {
             case "d":
             case "deposit":
@@ -64,7 +65,7 @@ public class ConsoleDialog {
         System.out.println("Goodbye. The purse still has "+purse.getBalance()+" "+CURRENCY);
     }
 
-    /** 
+    /**
      * Ask the user how many coins to deposit into purse, then deposit them.
      * Show result of success or failure.
      * The user can type the values on same line as he typed "d", e.g. "d 5 10 1"
@@ -91,7 +92,7 @@ public class ConsoleDialog {
             System.out.println("Invalid input: "+scanline.next() );
         scanline.close();
     }
-    
+
     /** Ask how much money (Baht) to withdraw and then do it.
      *  After withdraw, show the values of the coins we withdrew.
      */
@@ -105,11 +106,11 @@ public class ConsoleDialog {
     	}
     	// get the amount
     	Scanner scanline = new Scanner(inline);
-        
+
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
              Coin [] coins = purse.withdraw(amount);
-             if ( coins == null ) 
+             if ( coins == null )
                 System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
              else {
                 System.out.print("You withdrew:");
@@ -122,7 +123,7 @@ public class ConsoleDialog {
         else System.out.printf("Invalid amount: "+inline );
         scanline.close();
     }
-    
+
     /** Make a Coin (or BankNote or whatever) using requested value. */
     private Coin makeMoney(double value) {
     	return new Coin(value, CURRENCY);

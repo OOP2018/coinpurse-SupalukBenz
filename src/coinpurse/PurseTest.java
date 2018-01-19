@@ -10,13 +10,13 @@ import org.junit.Test;
 
 /**
  * Test the Purse using JUnit.
- * This is a JUnit 4 test suite.  
- * 
+ * This is a JUnit 4 test suite.
+ *
  * IDEs (Eclipse, Netbeans, IntelliJ, BlueJ) include JUnit 4,
  * but you have to tell the IDE to add it to your project as a "Library".
  * To run these tests, right click on this file (in Project panel)
  * and choose Run As -> JUnit test
- * 
+ *
  * @author  Resident Evil
  * @version 2018.01.19
  */
@@ -24,7 +24,7 @@ public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
 	private static final String CURRENCY = "BTC";
-	
+
     /**
      * Sets up the test fixture.
      * Called before every test method.
@@ -33,7 +33,7 @@ public class PurseTest {
     public void setUp() {
     	// nothing to initialize
     }
-    
+
     /** Make a coin with the default currency. To save typing "new Coin(...)" */
     private Coin makeCoin(double value) {
 		return new Coin(value,CURRENCY);
@@ -49,7 +49,7 @@ public class PurseTest {
         assertEquals(0, purse.count());
     }
 
-    
+
 
     /** Insert some coins. Easy test. */
     @Test
@@ -120,7 +120,7 @@ public class PurseTest {
 	public void testEasyWithdraw() {
 		Purse purse = new Purse(10);
 		double [] values = {1, 20, 0.5, 10}; // values of coins we will insert
-		
+
 		for(double value : values) {
 			Coin coin = makeCoin(value);
 			assertTrue(purse.insert(coin));
@@ -132,7 +132,7 @@ public class PurseTest {
 			assertEquals( 0, purse.getBalance(), TOL );
 		}
 	}
-	
+
 
 	/** Add 4 coins and then withdraw in pairs, but not in same order. */
 	@Test(timeout=1000)
@@ -141,21 +141,20 @@ public class PurseTest {
 		Coin[] coins = { makeCoin(5.0), makeCoin(10.0), makeCoin(1.0), makeCoin(5.0) };
 		// insert them all
 		for(Coin coin: coins) assertTrue( purse.insert(coin) );
-		
+
 		double amount1 = coins[1].getValue() + coins[3].getValue();
 		double amount2 = coins[0].getValue() + coins[2].getValue();
 		assertEquals(amount1+amount2, purse.getBalance(), TOL );
-		
 		Coin [] wd1 = purse.withdraw(amount1);
 		assertEquals(amount1, sum(wd1), TOL );
-		
+
 		assertEquals(amount2, purse.getBalance(), TOL );
 		Coin [] wd2 = purse.withdraw(amount2);
-		
+
 		// should be empty now
 		assertEquals(0, purse.getBalance(), TOL );
 	}
-	
+
 
 	/** Withdraw full amount in purse, using varying numbers of objects. */
 	@Test(timeout=1000)
@@ -200,7 +199,7 @@ public class PurseTest {
 		purse.insert( makeCoin(20) ); // now it has 20 + 20
 		assertNull( purse.withdraw(30) );
 	}
-	
+
 	/**
 	 * Sum the value of some coins.
 	 * @param coins array of coins
