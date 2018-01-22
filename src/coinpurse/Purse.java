@@ -116,24 +116,23 @@ public class Purse {
 		// This code assumes you decrease amount each time you remove a coin.
     	// Your code might use some other variable for the remaining amount to withdraw.
         double amountNeededToWithdraw = amount;
-        List<Coin> value = new ArrayList<Coin>();
-        List<Coin> coins = new ArrayList<Coin>();
-        Collections.sort(money);
-        value.addAll(money);
-        double amountTotal = amount;
 
+        List<Coin> temp = new ArrayList<Coin>();
+        Collections.sort(money);
+        double amountTotal = amount;
+        int size = money.size();
         if(amount < 0 || amount > getBalance()){
             return null;
         }
 
-        for (int i = value.size() - 1; i >= 0; i--) {
-            amountNeededToWithdraw = amountTotal - value.get(i).getValue();
+        for (int i = size - 1; i >= 0; i--) {
+            amountNeededToWithdraw = amountTotal - money.get(i).getValue();
             if (amountNeededToWithdraw >= 0) {
                 double sum = 0.0;
-                coins.add(value.get(i));
+                temp.add(money.get(i));
                 money.remove(i);
-                if (!coins.isEmpty()) {
-                    for (Coin c : coins) {
+                if (!temp.isEmpty()) {
+                    for (Coin c : temp) {
                         sum += c.getValue();
                     }
                     amountTotal = amount - sum;
@@ -142,11 +141,11 @@ public class Purse {
             if (amountNeededToWithdraw == 0 || money.isEmpty()) break;
         }
         if (amountNeededToWithdraw > 0 || amountNeededToWithdraw < 0) {
-            money.addAll(coins);
+            money.addAll(temp);
             return null;
 
         }else {
-                return coins.toArray(new Coin[value.size()]);
+                return temp.toArray(new Coin[temp.size()]);
             }
 
 
