@@ -4,7 +4,7 @@ package coinpurse;
  * Coin class include with value and currency
  * @author Supaluk Jaroensuk
  */
-public class Coin implements Comparable<Coin>{
+public class Coin implements Valuable{
     /**
      * A value of money
      */
@@ -42,7 +42,7 @@ public class Coin implements Comparable<Coin>{
     }
 
     /**
-     * The euals method will return true if two coins have the same value and currency
+     * The equals method will return true if two coins have the same value and currency
      * @param arg object which was compared
      * @return true if two coins are equal and false if two coins are not equal
      */
@@ -67,7 +67,6 @@ public class Coin implements Comparable<Coin>{
      * @return zero if they have same value and -1 if value less than value of parameter
      * and 1 if value greater than value of parameter
      */
-    @Override
     public int compareTo(Coin o) {
         if(o.value == value) return 0;
         if(o.value > value) return -1;

@@ -66,7 +66,7 @@ public class ConsoleDialog {
     }
 
     /**
-     * Ask the user how many coins to deposit into purse, then deposit them.
+     * Ask the user how many valuable to deposit into purse, then deposit them.
      * Show result of success or failure.
      * The user can type the values on same line as he typed "d", e.g. "d 5 10 1"
      * so check for that.
@@ -76,16 +76,16 @@ public class ConsoleDialog {
     	// If so then use them without prompting for more.
     	String inline = console.nextLine().trim();
     	if (inline.isEmpty()) {
-    		System.out.print("Enter value of coin(s) to deposit on one line [eg: 5 0.5 1]: ");
+    		System.out.print("Enter value of coin(s) or banknote(s) to deposit on one line [eg: 5 0.5 1]: ");
     		inline = console.nextLine();
     	}
         // parse input line into numbers
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            Coin coin = makeMoney(value);
-            System.out.printf("Deposit %s... ", coin.toString() );
-            boolean ok = purse.insert(coin);
+            Valuable valuable = makeMoney(value);
+            System.out.printf("Deposit %s... ", valuable.toString() );
+            boolean ok = purse.insert(valuable);
             System.out.println( (ok? "ok" : "FAILED") );
         }
         if ( scanline.hasNext() )
@@ -94,7 +94,7 @@ public class ConsoleDialog {
     }
 
     /** Ask how much money (Baht) to withdraw and then do it.
-     *  After withdraw, show the values of the coins we withdrew.
+     *  After withdraw, show the values of the valuable we withdrew.
      */
     public void withdrawDialog() {
     	// Check to see if user typed amount to withdraw on the same line as "w".
@@ -109,13 +109,13 @@ public class ConsoleDialog {
 
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
-             Coin [] coins = purse.withdraw(amount);
-             if ( coins == null )
+             Valuable [] valuables = purse.withdraw(amount);
+             if ( valuables == null )
                 System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
              else {
                 System.out.print("You withdrew:");
-                for(int k=0; k<coins.length; k++) {
-                	System.out.print((k==0?" ":", ") + coins[k].toString() );
+                for(int k=0; k<valuables.length; k++) {
+                	System.out.print((k==0?" ":", ") + valuables[k].toString() );
                 }
                 System.out.println();
             }
@@ -124,8 +124,9 @@ public class ConsoleDialog {
         scanline.close();
     }
 
-    /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Coin makeMoney(double value) {
+    /** Make a Valuable (or BankNote or whatever) using requested value. */
+    private Valuable makeMoney(double value) {
+        if(value >= 20) return new BankNote(value, CURRENCY);
     	return new Coin(value, CURRENCY);
     }
 
