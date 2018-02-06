@@ -57,7 +57,7 @@ public class BankNote implements Valuable{
      * Get each serial number of money
      * @return serial number, as a long
      */
-    public long getSerialNumber(){
+    public long getSerial(){
         return serialNumber;
     }
 
