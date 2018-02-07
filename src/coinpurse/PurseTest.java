@@ -38,6 +38,12 @@ public class PurseTest {
 		return new Coin(value,CURRENCY);
 	}
 
+	/**
+	 * Make a valuable with constant currency
+	 * @param value input value for test
+	 * @return new banknotes
+	 */
+	private Valuable makeBanknote(double value) { return new BankNote(value,CURRENCY); }
     /** Easy test that the Purse constructor is working. */
     @Test
     public void testConstructor()
@@ -48,7 +54,77 @@ public class PurseTest {
         assertEquals(0, purse.count());
     }
 
+	/**
+	 * Insert banknotes for test.
+	 */
+	@Test
+	public void testInsertBankNote(){
 
+    	Purse purse = new Purse(4);
+    	Valuable banknote1 = makeBanknote(20);
+		Valuable banknote2 = makeBanknote(100);
+		Valuable banknote3 = makeBanknote(50);
+		Valuable banknote4 = makeBanknote(50);
+		Valuable banknote5 = makeBanknote(10);
+
+		assertTrue(purse.insert(banknote1));
+		assertTrue(purse.insert(banknote2));
+		assertTrue(purse.insert(banknote3));
+		assertTrue(purse.insert(banknote4));
+		assertFalse(purse.insert(banknote5));
+
+		assertEquals(4,purse.count());
+
+		int value = 100;
+		Purse purse1 = new Purse(3);
+		Valuable valuable = new BankNote(value , "USD");
+		assertTrue(purse1.insert(valuable));
+		assertTrue(purse1.insert(valuable));
+		assertTrue(purse1.insert(valuable));
+		assertEquals(purse1.getBalance() , value*3,TOL);
+
+	}
+
+	/**
+	 * Test IsFull method that purse is full or not
+	 */
+	@Test
+	public void testIsFullBanknote(){
+		int capacity = 3;
+		Purse purse = new Purse(capacity);
+		assertEquals(capacity , purse.getCapacity());
+		Valuable banknote1 = makeBanknote(20);
+		Valuable banknote2 = makeBanknote(100);
+		Valuable banknote3 = makeBanknote(50);
+		assertFalse(purse.isFull());
+		assertTrue(purse.insert(banknote1));
+		assertTrue(purse.insert(banknote2));
+		assertTrue(purse.insert(banknote3));
+		assertTrue(purse.isFull());
+	}
+
+	/**
+	 * Add valuable and test withdraw method
+	 */
+	@Test
+	public void testWithdrawBanknote(){
+		Purse purse = new Purse(5);
+		double value1 = 20;
+		double value2 = 50;
+		double value3 = 100;
+
+		Valuable[] banknote = {makeBanknote(value1) , makeBanknote(value2) , makeBanknote(value3) , makeBanknote(value1) , makeBanknote(value3)};
+		for(Valuable v : banknote){
+			assertTrue(purse.insert(v));
+		}
+		Valuable[] withdraw = purse.withdraw(banknote[0].getValue()+banknote[1].getValue());
+		assertEquals(value1+value2 , sum(withdraw) , TOL);
+
+		Valuable[] withdraw1 = purse.withdraw(banknote[2].getValue() + banknote[3].getValue() + banknote[4].getValue());
+		assertEquals(value1+value3*2 , sum(withdraw1) ,TOL);
+
+		assertEquals( 0 ,purse.getBalance() ,TOL);
+	}
 
     /** Insert some coins. Easy test. */
     @Test

@@ -10,15 +10,22 @@ public class ValueComparator implements Comparator<Valuable> {
 
     /**
      * Compare value of two object
-     * @param o1 is object that implement Valuable
-     * @param o2 is object that implement Valuable
+     * @param a is object that implement Valuable
+     * @param b is object that implement Valuable
      * @return zero if they have same value
      * ,-1 if value of o1 less than value of o2
      * and 1 if value of o1 greater than value of o2
      */
-    public int compare(Valuable o1, Valuable o2) {
-        if(o1.getValue() > o2.getValue()) return 1;
-        else if(o1.getValue() < o2.getValue()) return -1;
-        return 0;
+    @Override
+    public int compare(Valuable a, Valuable b) {
+        int compareNumber = 0;
+        if(a.getCurrency().equalsIgnoreCase(b.getCurrency())) {
+            if (a.getValue() > b.getValue()) compareNumber = 1;
+            else if (a.getValue() < b.getValue()) compareNumber = -1;
+        }else {
+            compareNumber = a.getCurrency().compareTo(b.getCurrency());
+        }
+
+        return compareNumber;
     }
 }
