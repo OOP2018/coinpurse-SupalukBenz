@@ -51,7 +51,6 @@ public class Purse {
         return total;
     }
 
-
     /**
      * Return the capacity of the purse.
      * @return the capacity
@@ -67,9 +66,10 @@ public class Purse {
      *  @return true if purse is full.
      */
     public boolean isFull() {
-        return capacity == count();
+        return count() >= capacity;
     }
 
+    
     /**
      * Insert a valuable into the purse.
      * The valuable is only inserted if the purse has space for it
