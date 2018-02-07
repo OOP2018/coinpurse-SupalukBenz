@@ -5,6 +5,7 @@ package coinpurse;
  * @author Supaluk Jaroensuk
  */
 public class BankNote implements Valuable{
+
     /**
      * A value of money
      */
@@ -78,6 +79,6 @@ public class BankNote implements Valuable{
      * @return show amount of money, as include with value and currency
      */
     public String toString(){
-        return String.format("%.2f - %s [%d]" , value , currency , serialNumber);
+        return String.format("%.2f-%s note [%d]" , value , currency , serialNumber);
     }
 }

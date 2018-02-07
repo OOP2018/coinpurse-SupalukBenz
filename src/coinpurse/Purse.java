@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
+
 /**
  *  A coin purse contains coins and banknotes.
  *  You can insert coins or banknotes, withdraw money, check the balance,
@@ -12,6 +13,7 @@ import java.util.ArrayList;
  *  @author Supaluk Jaroensuk
  */
 public class Purse {
+
     /** Collection of objects in the purse. */
     private List<Valuable> money = new ArrayList<Valuable>();
 
@@ -22,7 +24,7 @@ public class Purse {
 
     /**
      *  Create a purse with a specified capacity.
-     *  @param capacity is maximum number of coins you can put in purse.
+     *  @param capacity is maximum number of valuables you can put in purse.
      */
     public Purse( int capacity ) {
         this.capacity = capacity;
@@ -93,25 +95,7 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
      */
     public Valuable[] withdraw( double amount ) {
-	   /*
-		* See lab sheet for outline of a solution,
-		* or devise your own solution.
-		* The idea is to be greedy.
-		* Try to withdraw the largest valuable possible.
-		* Each time you choose a valuable as a candidate for
-		* withdraw, add it to a temporary list and
-		* decrease the amount (remainder) to withdraw.
-		*
-		* If you reach a point where amountNeededToWithdraw == 0
-		* then you found a solution!
-		* Now, use the temporary list to remove valuable
-		* from the money list, and return the temporary
-		* list (as an array).
-		*/
 
-		// Did we get the full amount?
-		// This code assumes you decrease amount each time you remove a valuable.
-    	// Your code might use some other variable for the remaining amount to withdraw.
         double amountNeededToWithdraw = amount;
 
         List<Valuable> temp = new ArrayList<Valuable>();
@@ -146,13 +130,6 @@ public class Purse {
                 return temp.toArray(new Valuable[temp.size()]);
             }
 
-
-		// Success.
-		// Remove the valuable you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
-
 	}
 
     /**
@@ -160,7 +137,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("Total %d coins , value %.2f" , count() , getBalance());
+    	return String.format("Total %d , value %.2f" , count() , getBalance());
     }
 
 }
