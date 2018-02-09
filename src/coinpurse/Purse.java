@@ -1,9 +1,6 @@
 package coinpurse;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Collections;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *  A coin purse contains coins and banknotes.
@@ -69,7 +66,7 @@ public class Purse {
         return count() >= capacity;
     }
 
-    
+
     /**
      * Insert a valuable into the purse.
      * The valuable is only inserted if the purse has space for it
@@ -95,42 +92,48 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
      */
     public Valuable[] withdraw( double amount ) {
+        Valuable valuable = new Money(amount , "Baht");
+        return withdraw(valuable);
+	}
 
-        double amountNeededToWithdraw = amount;
+	public Valuable[] withdraw(Valuable amount){
+
+        double amountNeededToWithdraw = amount.getValue();
+        double amountTotal = amount.getValue();
 
         List<Valuable> temp = new ArrayList<Valuable>();
-        Comparator<Valuable> comparable = new ValueComparator();
-        Collections.sort(money , comparable);
-        double amountTotal = amount;
-        int size = money.size();
-        if(amount < 0 || amount > getBalance()){
-            return null;
-        }
+        Comparator<Valuable> comparator = new ValueComparator();
 
-        for (int i = size - 1; i >= 0; i--) {
-            amountNeededToWithdraw = amountTotal - money.get(i).getValue();
-            if (amountNeededToWithdraw >= 0) {
-                double sum = 0.0;
-                temp.add(money.get(i));
-                money.remove(i);
+        List<Valuable> filterMoney = MoneyUtil.filterByCurrency(money , amount.getCurrency());
+        money.removeAll(filterMoney);
+        Collections.sort(filterMoney , comparator);
+
+        for(int i = filterMoney.size() - 1; i >= 0 ; i--){
+            amountNeededToWithdraw = amountTotal - filterMoney.get(i).getValue();
+            if(amountNeededToWithdraw >= 0){
+                temp.add(filterMoney.get(i));
+                filterMoney.remove(i);
+                double sum = 0;
                 if (!temp.isEmpty()) {
                     for (Valuable c : temp) {
                         sum += c.getValue();
                     }
-                    amountTotal = amount - sum;
+                    amountTotal = amount.getValue() - sum;
                 }
             }
-            if (amountNeededToWithdraw == 0 || money.isEmpty()) break;
+            if(amountNeededToWithdraw == 0 || filterMoney.isEmpty()) break;
         }
-        if (amountNeededToWithdraw > 0 || amountNeededToWithdraw < 0) {
-            money.addAll(temp);
+
+        if(amountNeededToWithdraw > 0 || amountNeededToWithdraw < 0){
+            filterMoney.addAll(temp);
+            money.addAll(filterMoney);
             return null;
-
         }else {
-                return temp.toArray(new Valuable[temp.size()]);
-            }
+            money.addAll(filterMoney);
+            return temp.toArray(new Valuable[temp.size()]);
+        }
 
-	}
+    }
 
     /**
      * toString returns a string description of the purse contents.

@@ -22,7 +22,7 @@ import org.junit.Test;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
-	private static final String CURRENCY = "BTC";
+	private static final String CURRENCY = "Baht";
 
     /**
      * Sets up the test fixture.
@@ -43,7 +43,7 @@ public class PurseTest {
 	 * @param value input value for test
 	 * @return new banknotes
 	 */
-	private Valuable makeBanknote(double value) { return new BankNote(value,CURRENCY); }
+	private Valuable makeBanknote(double value) { return new Banknote(value,CURRENCY); }
     /** Easy test that the Purse constructor is working. */
     @Test
     public void testConstructor()
@@ -77,7 +77,7 @@ public class PurseTest {
 
 		int value = 100;
 		Purse purse1 = new Purse(3);
-		Valuable valuable = new BankNote(value , "USD");
+		Valuable valuable = new Banknote(value , "USD");
 		assertTrue(purse1.insert(valuable));
 		assertTrue(purse1.insert(valuable));
 		assertTrue(purse1.insert(valuable));
