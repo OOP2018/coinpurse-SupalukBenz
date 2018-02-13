@@ -84,7 +84,7 @@ public class Purse {
     }
 
     /**
-     *  Withdraw the requested amount of money.
+     *  Withdraw the requested amount of money which currency is Baht.
      *  Return an array of valuable withdrawn from purse,
      *  or return null if cannot withdraw the amount requested.
      *  @param amount is the amount to withdraw
@@ -96,6 +96,13 @@ public class Purse {
         return withdraw(valuable);
 	}
 
+    /**
+     * Withdraw the requested amount of Valuable
+     * Can withdraw when amount has the same currency with money
+     * @param amount is amount that need to withdraw
+     * @return Array that include with coins or banknote of amount
+     * and return null of cannot withdraw
+     */
 	public Valuable[] withdraw(Valuable amount){
 
         double amountNeededToWithdraw = amount.getValue();
@@ -132,6 +139,7 @@ public class Purse {
             money.addAll(filterMoney);
             return temp.toArray(new Valuable[temp.size()]);
         }
+
 
     }
 

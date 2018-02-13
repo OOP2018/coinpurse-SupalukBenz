@@ -1,10 +1,10 @@
 package coinpurse;
 
 /**
- * Banknote class include value, currency and get serial number
+ * BankNote class include value, currency and get serial number
  * @author Supaluk Jaroensuk
  */
-public class Banknote extends Money{
+public class BankNote extends Money{
     /**
      * A unique serial number
      */
@@ -20,7 +20,7 @@ public class Banknote extends Money{
      * @param value is user's amount
      * @param currency is currency of value
      */
-    public Banknote(double value, String currency) {
+    public BankNote(double value, String currency) {
         super(value , currency);
         this.serialNumber = nextSerialNumber;
         nextSerialNumber++;

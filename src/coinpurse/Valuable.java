@@ -5,7 +5,7 @@ package coinpurse;
  * Contain with abstract method
  * @author Supaluk Jaroensuk
  */
-public interface Valuable {
+public interface Valuable extends Comparable<Valuable>{
 
     /**
      * Abstract method for get the value of object
@@ -18,4 +18,5 @@ public interface Valuable {
      * @return currency of object, as a String
      */
     public String getCurrency();
+
 }
