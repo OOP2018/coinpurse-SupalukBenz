@@ -38,6 +38,6 @@ public class BankNote extends Money{
      * @return show amount of money, as include with value and currency
      */
     public String toString(){
-        return String.format("%.2f-%s note [%d]" ,getValue() , getCurrency() , serialNumber);
+        return String.format("%.2f %s note [%d]%n" ,getValue() , getCurrency() , serialNumber);
     }
 }

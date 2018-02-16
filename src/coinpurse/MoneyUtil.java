@@ -16,8 +16,8 @@ public class MoneyUtil {
      */
     public static void check(){
         List<Valuable> valuables = new ArrayList<>();
-        valuables.add(new Banknote(10 , "Yen"));
-        valuables.add(new Banknote(1000 ,"Yen"));
+        valuables.add(new BankNote(10 , "Yen"));
+        valuables.add(new BankNote(1000 ,"Yen"));
         valuables.add(new Coin(1,"Yen"));
         valuables.add(new Coin(0.25,"Yen"));
         valuables.add(new Coin(0.50, "Yen"));
@@ -25,8 +25,8 @@ public class MoneyUtil {
         valuables.add(new Coin(0, "Dollar"));
         System.out.println("Total coins");
         printCoins(valuables);
-        List<Valuable> coinCheckFiter = filterByCurrency(valuables , "Yen");
-        sortCoins(coinCheckFiter);
+        List<Valuable> coinCheckFilter = filterByCurrency(valuables , "Yen");
+        sortCoins(coinCheckFilter);
     }
 
     /**
@@ -47,7 +47,7 @@ public class MoneyUtil {
      */
     public static List<Valuable> filterByCurrency(List<Valuable> money , String currency){
         List<Valuable> valuables = new ArrayList<Valuable>();
-        System.out.println("Currency : " + currency);
+
         for(Valuable c : money){
             if(c.getCurrency().equals(currency)) valuables.add(c);
         }

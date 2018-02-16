@@ -82,8 +82,8 @@ public class ConsoleDialog {
         // parse input line into numbers
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
-            double value = scanline.nextDouble();
-            Valuable valuable = makeMoney(value);
+            double amount = scanline.nextDouble();
+            Valuable valuable = makeMoney(amount);
             System.out.printf("Deposit %s... ", valuable.toString() );
             boolean ok = purse.insert(valuable);
             System.out.println( (ok? "ok" : "FAILED") );
@@ -125,9 +125,16 @@ public class ConsoleDialog {
     }
 
     /** Make a Valuable (or BankNote or whatever) using requested value. */
-    private Valuable makeMoney(double value) {
-        if(value >= 20) return new BankNote(value, CURRENCY);
-    	return new Coin(value, CURRENCY);
+    private Valuable makeMoney(double amount) {
+        MoneyFactory moneyFactory = MoneyFactory.getInstance();
+        Valuable valuable = null;
+        try{
+            valuable = moneyFactory.createMoney(amount);
+        }catch (IllegalArgumentException ex){
+            System.out.println("Sorry , " + amount + " is not a valid amount.");
+        }
+        return valuable;
+
     }
 
 }

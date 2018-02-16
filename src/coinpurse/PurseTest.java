@@ -43,7 +43,7 @@ public class PurseTest {
 	 * @param value input value for test
 	 * @return new banknotes
 	 */
-	private Valuable makeBanknote(double value) { return new Banknote(value,CURRENCY); }
+	private Valuable makeBanknote(double value) { return new BankNote(value,CURRENCY); }
     /** Easy test that the Purse constructor is working. */
     @Test
     public void testConstructor()
@@ -77,7 +77,7 @@ public class PurseTest {
 
 		int value = 100;
 		Purse purse1 = new Purse(3);
-		Valuable valuable = new Banknote(value , "USD");
+		Valuable valuable = new BankNote(value , "USD");
 		assertTrue(purse1.insert(valuable));
 		assertTrue(purse1.insert(valuable));
 		assertTrue(purse1.insert(valuable));

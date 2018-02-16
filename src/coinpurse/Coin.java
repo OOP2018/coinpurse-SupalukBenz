@@ -7,7 +7,6 @@ package coinpurse;
 public class Coin extends Money {
     /**
      * Initialize money
-     *
      * @param value    is user's amount
      * @param currency is value's currency
      */
