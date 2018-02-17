@@ -25,6 +25,15 @@ public class BankNote extends Money{
         this.serialNumber = nextSerialNumber;
         nextSerialNumber++;
     }
+
+    /**
+     * For specify a serial number of each factory
+     * @param serialNumber is initialize a serial number
+     */
+    public static void setSerialNumber(long serialNumber){
+        BankNote.nextSerialNumber = serialNumber;
+    }
+
     /**
      * Get each serial number of money
      * @return serial number, as a long

@@ -5,6 +5,14 @@ package coinpurse;
  * @author Supaluk Jaroensuk
  */
 public class MalayMoneyFactory extends MoneyFactory{
+
+    /**
+     * Run unique serial number
+     */
+    public MalayMoneyFactory(){
+        BankNote.setSerialNumber(1000000);
+    }
+
     /**
      * Specify that value is Sen or Ringgit in the Malay money
      * @param value is value of money
@@ -16,4 +24,5 @@ public class MalayMoneyFactory extends MoneyFactory{
         if(value < 1) return new Coin(value*100 , "Sen");
         return new BankNote(value , "Ringgit");
     }
+
 }

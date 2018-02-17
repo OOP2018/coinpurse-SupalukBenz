@@ -7,6 +7,13 @@ package coinpurse;
 public class ThaiMoneyFactory extends MoneyFactory{
 
     /**
+     * Run unique serial number
+     */
+    public ThaiMoneyFactory(){
+        BankNote.setSerialNumber(1000000);
+    }
+
+    /**
      * Specify that value is coin or banknote
      * @param value is value of money
      * @return Coin if value less than 2 , Banknote if value more than or equal 20
