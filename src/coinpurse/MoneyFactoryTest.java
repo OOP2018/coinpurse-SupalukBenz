@@ -221,4 +221,18 @@ public class MoneyFactoryTest {
 
     }
 
+    /**
+     * Test that a serial number running or not
+     */
+    @Test
+    public void testSerialNumber(){
+
+        Valuable[] thaiMoney = insertMoney(thaiFactory , moneyDouble);
+        assertTrue(thaiMoney[7].compareTo(thaiMoney[8]) < 0);
+
+        Valuable[] malayMoney = insertMoney(malayFactory , moneyDouble);
+        assertTrue(malayMoney[3].compareTo(malayMoney[4]) < 0);
+
+    }
+
 }
