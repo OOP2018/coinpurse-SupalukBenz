@@ -22,16 +22,28 @@ public class MoneyFactoryTest {
     private static final double TOL = 1.0E-6;
 
     /**
-     * List of money for testing, as a double
+     * List of money for testing money of Malay, as a double
      */
-    private static final List<Double> moneyDouble = Arrays.asList(0.01 , 0.05 , 0.50
-            , 1.0 , 2.0 , 5.0 , 10.0 , 20.0 , 50.0);
+    private static final List<Double> moneyDoubleMalay = Arrays.asList(0.05 , 0.10
+            , 0.2 , 0.5 , 1.0, 2.0 , 5.0 , 10.0 , 20.0 , 50.0 , 100.0);
 
     /**
-     * List of money for testing, as a String
+     * List of money for testing money of Malay, as a String
      */
-    private static final List<String> moneyString = Arrays.asList("0.01" , "0.05" , "0.50"
-            , "1.0" , "2.0" , "5.0" , "10.0" , "20.0" , "50.0");
+    private static final List<String> moneyStringMalay = Arrays.asList("0.05" , "0.10" , "0.20"
+            ,"0.5", "1.0" , "2.0" , "5.0" , "10.0" , "20.0" , "50.0" , "100.0");
+
+    /**
+     * List of money for testing money of Thai, as a double
+     */
+    private static final List<Double> moneyDoubleThai = Arrays.asList(1.0 , 2.0 ,5.0 , 10.0 , 20.0
+            , 50.0 , 100.0 , 500.0 ,1000.0);
+
+    /**
+     * List of money for testing money of Thai, as a String
+     */
+    private static final List<String> moneyStringThai = Arrays.asList("1.0" , "2.0" , "5.0" , "10.0"
+            , "20.0" , "50.0" , "100.0" , "500.0" , "1000.0");
 
     /**
      * Make a valuable by object of MoneyFactory
@@ -144,12 +156,12 @@ public class MoneyFactoryTest {
     @Test
     public void testCreateThaiMoneyDouble(){
 
-        Valuable[] thaiMoney = insertMoney(thaiFactory , moneyDouble);
-        assertEquals(moneyDouble.get(0), thaiMoney[0].getValue() ,TOL);
-        assertEquals(moneyDouble.get(1), thaiMoney[1].getValue() ,TOL);
-        assertEquals(moneyDouble.get(2), thaiMoney[2].getValue() ,TOL);
-        assertEquals(moneyDouble.get(5), thaiMoney[5].getValue() ,TOL);
-        assertEquals(moneyDouble.get(8), thaiMoney[8].getValue() ,TOL);
+        Valuable[] thaiMoney = insertMoney(thaiFactory , moneyDoubleThai);
+        assertEquals(moneyDoubleThai.get(0), thaiMoney[0].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(1), thaiMoney[1].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(2), thaiMoney[2].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(5), thaiMoney[5].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(8), thaiMoney[8].getValue() ,TOL);
 
     }
 
@@ -159,13 +171,13 @@ public class MoneyFactoryTest {
     @Test
     public void testCreateMalayMoneyDouble(){
 
-        Valuable[] malayMoney = insertMoney(malayFactory , moneyDouble);
-        assertEquals(1.00, malayMoney[0].getValue() ,TOL);
-        assertEquals(5.00, malayMoney[1].getValue() ,TOL);
-        assertEquals(50.0, malayMoney[2].getValue() ,TOL);
-        assertEquals(moneyDouble.get(3), malayMoney[3].getValue() ,TOL);
-        assertEquals(moneyDouble.get(5), malayMoney[5].getValue() ,TOL);
-        assertEquals(moneyDouble.get(8), malayMoney[8].getValue() ,TOL);
+        Valuable[] malayMoney = insertMoney(malayFactory , moneyDoubleMalay);
+        assertEquals(moneyDoubleMalay.get(0), malayMoney[0].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(1), malayMoney[1].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(2), malayMoney[2].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(3), malayMoney[3].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(5), malayMoney[5].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(8), malayMoney[8].getValue() ,TOL);
 
     }
 
@@ -175,12 +187,12 @@ public class MoneyFactoryTest {
     @Test
     public void testCreateThaiMoneyString(){
 
-        Valuable[] thaiMoney = insertMoneyString(thaiFactory , moneyString);
-        assertEquals(moneyDouble.get(0), thaiMoney[0].getValue() ,TOL);
-        assertEquals(moneyDouble.get(1), thaiMoney[1].getValue() ,TOL);
-        assertEquals(moneyDouble.get(2), thaiMoney[2].getValue() ,TOL);
-        assertEquals(moneyDouble.get(5), thaiMoney[5].getValue() ,TOL);
-        assertEquals(moneyDouble.get(8), thaiMoney[8].getValue() ,TOL);
+        Valuable[] thaiMoney = insertMoneyString(thaiFactory , moneyStringThai);
+        assertEquals(moneyDoubleThai.get(0), thaiMoney[0].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(1), thaiMoney[1].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(2), thaiMoney[2].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(5), thaiMoney[5].getValue() ,TOL);
+        assertEquals(moneyDoubleThai.get(8), thaiMoney[8].getValue() ,TOL);
 
     }
 
@@ -190,13 +202,13 @@ public class MoneyFactoryTest {
     @Test
     public void testCreateMalayString(){
 
-        Valuable[] malayMoney = insertMoneyString(malayFactory , moneyString);
-        assertEquals(1.00, malayMoney[0].getValue() ,TOL);
-        assertEquals(5.00, malayMoney[1].getValue() ,TOL);
-        assertEquals(50.0, malayMoney[2].getValue() ,TOL);
-        assertEquals(moneyDouble.get(3), malayMoney[3].getValue() ,TOL);
-        assertEquals(moneyDouble.get(5), malayMoney[5].getValue() ,TOL);
-        assertEquals(moneyDouble.get(8), malayMoney[8].getValue() ,TOL);
+        Valuable[] malayMoney = insertMoneyString(malayFactory , moneyStringMalay);
+        assertEquals(moneyDoubleMalay.get(0), malayMoney[0].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(1), malayMoney[1].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(2), malayMoney[2].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(3), malayMoney[3].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(5), malayMoney[5].getValue() ,TOL);
+        assertEquals(moneyDoubleMalay.get(8), malayMoney[8].getValue() ,TOL);
 
     }
 
@@ -206,17 +218,17 @@ public class MoneyFactoryTest {
     @Test
     public void testCurrencyMalay(){
 
-        Valuable[] malayMoney = insertMoneyString(malayFactory , moneyString);
-        Valuable check1 = new Coin(1.00 , "Sen");
+        Valuable[] malayMoney = insertMoneyString(malayFactory , moneyStringMalay);
+        Valuable check1 = new Coin(0.05 , "Sen");
         assertEquals(check1, malayMoney[0]);
 
-        Valuable check2 = new Coin(5.00 , "Sen");
+        Valuable check2 = new Coin(0.10 , "Sen");
         assertEquals(check2, malayMoney[1]);
 
-        Valuable check3 = new Coin(50.0 , "Sen");
+        Valuable check3 = new Coin(0.20 , "Sen");
         assertEquals(check3, malayMoney[2]);
 
-        Valuable check4 = new BankNote(50.0 , "Ringgit");
+        Valuable check4 = new BankNote(20.0 , "Ringgit");
         assertEquals(check4, malayMoney[8]);
 
     }
@@ -227,11 +239,11 @@ public class MoneyFactoryTest {
     @Test
     public void testSerialNumber(){
 
-        Valuable[] thaiMoney = insertMoney(thaiFactory , moneyDouble);
+        Valuable[] thaiMoney = insertMoney(thaiFactory , moneyDoubleThai);
         assertTrue(thaiMoney[7].compareTo(thaiMoney[8]) < 0);
 
-        Valuable[] malayMoney = insertMoney(malayFactory , moneyDouble);
-        assertTrue(malayMoney[3].compareTo(malayMoney[4]) < 0);
+        Valuable[] malayMoney = insertMoney(malayFactory , moneyDoubleMalay);
+        assertTrue(malayMoney[4].compareTo(malayMoney[5]) < 0);
 
     }
 

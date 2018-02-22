@@ -13,7 +13,6 @@ public class BankNote extends Money{
     /**
      * String serial number
      */
-    private static long nextSerialNumber = 1000000;
 
     /**
      * Initialize money and run a unique serial number
@@ -22,16 +21,14 @@ public class BankNote extends Money{
      */
     public BankNote(double value, String currency) {
         super(value , currency);
-        this.serialNumber = nextSerialNumber;
-        nextSerialNumber++;
     }
 
     /**
      * For specify a serial number of each factory
      * @param serialNumber is initialize a serial number
      */
-    public static void setSerialNumber(long serialNumber){
-        BankNote.nextSerialNumber = serialNumber;
+    public void setSerialNumber(long serialNumber){
+        this.serialNumber = serialNumber;
     }
 
     /**

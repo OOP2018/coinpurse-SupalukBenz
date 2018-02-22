@@ -18,7 +18,7 @@ public class ConsoleDialog {
     final String FULL_PROMPT = "\nEnter d (deposit), w (withdraw), ? (inquiry), or q (quit): ";
     // Shorter prompt shown subsequently
     final String SHORT_PROMPT = "\nEnter d, w, ?, or q: ";
-
+    final MoneyFactory moneyFactory = MoneyFactory.getInstance();
 	// The dialog receives a Purse object by dependency injection (as parameter to constructor)
     // so don't create a Purse here.
     private Purse purse;
@@ -28,6 +28,7 @@ public class ConsoleDialog {
      * @param purse is the Purse to interact with.
      */
     public ConsoleDialog(Purse purse ) {
+
     	this.purse = purse;
     }
 
@@ -126,15 +127,7 @@ public class ConsoleDialog {
 
     /** Make a Valuable (or BankNote or whatever) using requested value. */
     private Valuable makeMoney(double amount) {
-        MoneyFactory moneyFactory = MoneyFactory.getInstance();
-        Valuable valuable = null;
-        try{
-            valuable = moneyFactory.createMoney(amount);
-        }catch (IllegalArgumentException ex){
-            System.out.println("Sorry , " + amount + " is not a valid amount.");
-        }
-        return valuable;
-
+        return moneyFactory.createMoney(amount);
     }
 
 }

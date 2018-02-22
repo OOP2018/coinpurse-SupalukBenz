@@ -7,10 +7,15 @@ package coinpurse;
 public class ThaiMoneyFactory extends MoneyFactory{
 
     /**
-     * Run unique serial number
+     * Run serial number
+     */
+    private static long nextSerialNumber = 1000000;
+
+    /**
+     * Initialize by call super class
      */
     public ThaiMoneyFactory(){
-        BankNote.setSerialNumber(1000000);
+        super();
     }
 
     /**
@@ -20,7 +25,16 @@ public class ThaiMoneyFactory extends MoneyFactory{
      */
     @Override
     public Valuable createMoney(double value) {
-        if(value >= 20) return new BankNote(value , "Baht");
-        return new Coin(value , "Baht");
+        if(value == 20 || value == 50 || value == 100 || value == 500 || value == 1000) {
+            BankNote bankNote = new BankNote(value , "Ringgit");
+            bankNote.setSerialNumber(nextSerialNumber++);
+            return bankNote;
+
+        }else if(value == 1 || value == 2 || value == 5 || value == 10){
+            return new Coin(value , "Baht");
+
+        }
+
+        throw new IllegalArgumentException("Value is invalid");
     }
 }

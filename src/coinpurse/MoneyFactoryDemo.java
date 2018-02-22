@@ -99,17 +99,21 @@ public class MoneyFactoryDemo {
     }
 
     public static void main(String[] args) {
-        List<Double> money  = Arrays.asList(1.0, 1.0, 2.0, 5.0, 10.0, 20.0, 20.0, 50.0, 100.0);
+
+        List<Double> moneyThai  = Arrays.asList(1.0 , 2.0 ,5.0 , 10.0 , 20.0
+                , 50.0 , 100.0 , 500.0 ,1000.0);
+        List<Double> moneyMalay = Arrays.asList(1.0, 2.0 , 5.0 , 10.0 , 20.0 , 50.0 , 100.0);
         List<Double> moneyTestSen = Arrays.asList(0.05 , 0.10 , 0.20 , 0.50);
-        System.out.println("Money for adding " + money);
-        System.out.println("Money Sen for adding " + moneyTestSen);
-        System.out.println();
-        testThaiFactory(money);
+        System.out.println("Test Baht");
+        System.out.println("Money for adding " + moneyThai);
+        testThaiFactory(moneyThai);
         System.out.println();
         System.out.println("Test Sen");
+        System.out.println("Money Sen for adding " + moneyTestSen);
         testMalayFactory(moneyTestSen);
         System.out.println();
         System.out.println("Test Ringgit");
-        testMalayFactory(money);
+        System.out.println("Money Ringgit for adding " + moneyMalay);
+        testMalayFactory(moneyMalay);
     }
 }

@@ -17,6 +17,7 @@ public abstract class MoneyFactory {
      * @return subclass of MoneyFactory
      */
     public static MoneyFactory getInstance(){
+        if(factory == null)factory = ThaiMoneyFactory.getInstance();
         return factory;
     }
 
@@ -33,7 +34,7 @@ public abstract class MoneyFactory {
      * @return
      */
     public Valuable createMoney(String value){
-
+        if(value != null && !value.matches("[-+]?\\d*\\.?\\d+")) throw  new IllegalArgumentException("Value is invalid");
         double valueFromString = 0.0;
         try {
             valueFromString = Double.parseDouble(value);
