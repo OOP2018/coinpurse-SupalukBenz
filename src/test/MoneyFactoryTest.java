@@ -1,5 +1,6 @@
-package coinpurse;
+package test;
 
+import coinpurse.*;
 import org.junit.Before;
 import org.junit.Test;
 
