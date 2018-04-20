@@ -20,8 +20,8 @@ public class Coin extends Money {
      * @return show amount of money, as include with value and currency
      */
     public String toString() {
-        if(getCurrency().equals("Sen")) return String.format("%.2f - %s%n", getValue()*100, getCurrency());
-        return String.format("%.2f - %s%n", getValue(), getCurrency());
+        if(getCurrency().equals("Sen")) return String.format("%.2f - %s", getValue()*100, getCurrency());
+        return String.format("%.2f - %s", getValue(), getCurrency());
     }
 
 }
